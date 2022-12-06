@@ -28,5 +28,16 @@ namespace Algorithms
 
             return retval;
         }
+
+       
+        internal static  int Factorial3(int x)
+        {
+            return FactTail(x, 1);
+        }
+
+        private static int FactTail(int x, int acc)
+        {
+            return (x == 0) ? acc : FactTail(x - 1, acc * x);
+        }
     }
 }
