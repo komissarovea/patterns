@@ -9,7 +9,11 @@ namespace Algorithms
     {
         static void Main() // string[] args
         {
-            BinarySearch.BinarySearchSample();
+            //BinarySearch.BinarySearchSample();
+
+            SelectionSort.SelectionSortSample(new List<int> { 7, 3, 5, 1, 9 });
+            SelectionSort.SelectionSortSample(new List<int> { 7, 3, 5, 1, 9 });
+
         }
 
 
