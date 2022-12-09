@@ -22,8 +22,12 @@ namespace Algorithms
                 //Console.WriteLine($"Factorial 5: {Factorial.Factorial2(5)}");
                 //Console.WriteLine($"Factorial 5: {Factorial.Factorial3(5)}");
 
-                QuickSort.QuickSortSample(new List<int> { 7, 3, 5, 1, 9 }, 2);
-                QuickSort.QuickSortSample(new List<int> { 7, 3, 5, 1, 1, 9 }, 1);
+                //QuickSort.QuickSortSample(new List<int> { 7, 3, 5, 1, 9 }, 2);
+                //QuickSort.QuickSortSample(new List<int> { 7, 3, 5, 1, 1, 9 }, 1);
+
+                LinkNode linkNode= new LinkNode(1, new LinkNode(7, new LinkNode(9, new LinkNode(5))));
+                linkNode.Print();
+                Console.WriteLine(linkNode.GetLength());
             }
             catch (Exception ex)
             {
