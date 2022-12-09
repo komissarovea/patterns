@@ -39,7 +39,6 @@ namespace Algorithms
                     else
                         equal.Add(x);
                 }
-
                 return QuickSort1(less).Concat(equal).Concat(QuickSort1(greater)).ToList();
             }
         }
@@ -60,7 +59,6 @@ namespace Algorithms
             }
             return list;
         }
-
 
         private static int Partition(IList<int> list, int left, int right)
         {

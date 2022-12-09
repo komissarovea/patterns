@@ -36,7 +36,9 @@ namespace Algorithms
                 //BubbleSort.BubbleSortSample(new List<int> { 8, 5, 4, 2, 1});
                 // BubbleSort.BubbleSortSample(new List<int> { 7, 3, 5, 1, 9 }, 2);
 
-                InsertSort.InsertSortSample(new List<int> { 5, 2, 4, 6, 1, 3 });
+                //InsertSort.InsertSortSample(new List<int> { 5, 2, 4, 6, 1, 3 });
+
+                MergeSort.MergeSortSample(new List<int> { 5, 2, 4, 6, 1, 3 });
             }
             catch (Exception ex)
             {
