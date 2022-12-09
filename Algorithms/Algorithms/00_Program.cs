@@ -12,6 +12,9 @@ namespace Algorithms
         {
             try
             {
+                BreadthSearch.BreadthSearchSample();
+
+
                 //BinarySearch.BinarySearchSample();
 
                 //SelectionSort.SelectionSortSample(new List<int> { 7, 3, 5, 1, 9 });
@@ -38,7 +41,7 @@ namespace Algorithms
 
                 //InsertSort.InsertSortSample(new List<int> { 5, 2, 4, 6, 1, 3 });
 
-                MergeSort.MergeSortSample(new List<int> { 5, 2, 4, 6, 1, 3 });
+                //MergeSort.MergeSortSample(new List<int> { 5, 2, 4, 6, 1, 3 });
             }
             catch (Exception ex)
             {
