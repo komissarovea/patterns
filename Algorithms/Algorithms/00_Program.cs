@@ -28,10 +28,15 @@ namespace Algorithms
                 //LinkNode linkNode= new LinkNode(1, new LinkNode(7, new LinkNode(9, new LinkNode(5))));
                 //linkNode.Print();
                 //Console.WriteLine(linkNode.GetLength());
+                //LinkNode linkNode = new LinkNode(1, new LinkNode(2, new LinkNode(3, new LinkNode(4, new LinkNode(7)))));
+                //var reversed = linkNode.Reverse();
+                //reversed.Print();
 
-                LinkNode linkNode = new LinkNode(1, new LinkNode(2, new LinkNode(3, new LinkNode(4, new LinkNode(7)))));
-                var reversed = linkNode.Reverse();
-                reversed.Print();
+                //BubbleSort.BubbleSortSample(new List<int> { 5, 1, 4, 2, 8 });
+
+                BubbleSort.BubbleSortSample(new List<int> { 8, 5, 4, 2, 1});
+
+                // BubbleSort.BubbleSortSample(new List<int> { 7, 3, 5, 1, 9 }, 2);
             }
             catch (Exception ex)
             {
