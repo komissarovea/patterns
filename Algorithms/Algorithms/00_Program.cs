@@ -25,9 +25,13 @@ namespace Algorithms
                 //QuickSort.QuickSortSample(new List<int> { 7, 3, 5, 1, 9 }, 2);
                 //QuickSort.QuickSortSample(new List<int> { 7, 3, 5, 1, 1, 9 }, 1);
 
-                LinkNode linkNode= new LinkNode(1, new LinkNode(7, new LinkNode(9, new LinkNode(5))));
-                linkNode.Print();
-                Console.WriteLine(linkNode.GetLength());
+                //LinkNode linkNode= new LinkNode(1, new LinkNode(7, new LinkNode(9, new LinkNode(5))));
+                //linkNode.Print();
+                //Console.WriteLine(linkNode.GetLength());
+
+                LinkNode linkNode = new LinkNode(1, new LinkNode(2, new LinkNode(3, new LinkNode(4, new LinkNode(7)))));
+                var reversed = linkNode.Reverse();
+                reversed.Print();
             }
             catch (Exception ex)
             {
