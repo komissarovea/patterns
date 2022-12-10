@@ -13,7 +13,9 @@ namespace Algorithms
             try
             {
 
-                DijkstrasAlgorithm.DijkstrasAlgorithmSample();
+                GreedySetCovering.Sample();
+
+               // DijkstrasAlgorithm.DijkstrasAlgorithmSample();
 
                 //BreadthSearch.BreadthSearchSample();
 
