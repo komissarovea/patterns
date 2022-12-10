@@ -12,8 +12,10 @@ namespace Algorithms
         {
             try
             {
-                BreadthSearch.BreadthSearchSample();
 
+                DijkstrasAlgorithm.DijkstrasAlgorithmSample();
+
+                //BreadthSearch.BreadthSearchSample();
 
                 //BinarySearch.BinarySearchSample();
 
