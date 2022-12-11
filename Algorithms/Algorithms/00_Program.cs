@@ -12,10 +12,11 @@ namespace Algorithms
         {
             try
             {
+                DynamicProgramming.Sample();
 
-                GreedySetCovering.Sample();
+                //GreedySetCovering.Sample();
 
-               // DijkstrasAlgorithm.DijkstrasAlgorithmSample();
+                // DijkstrasAlgorithm.DijkstrasAlgorithmSample();
 
                 //BreadthSearch.BreadthSearchSample();
 
