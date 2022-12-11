@@ -12,7 +12,15 @@ namespace Algorithms
         {
             try
             {
-                DynamicProgramming.Sample();
+                var arr1 = new int[] { 1, 2, 3, 4, 5 };
+                var arr2 = arr1.Select(x => x * 2).ToArray();
+                var sum = arr1.Aggregate("", (acc, x) =>
+                {
+                    return acc + x;
+                });
+                Console.WriteLine(sum);
+
+                //DynamicProgramming.Sample();
 
                 //GreedySetCovering.Sample();
 
