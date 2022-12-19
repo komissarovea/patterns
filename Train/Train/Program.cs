@@ -33,15 +33,15 @@ class Program
         IMessenger<EmailMessage, Message> messenger = new SimpleMessenger();
         Message message = messenger.WriteMessage("Hello World");
         Console.WriteLine(message.Text);
-        messenger.SendMessage(new EmailMessage("Test"));
+        messenger.SendMessage(new EmailMessage("Test")); // Контравариантность
 
         IMessenger<EmailMessage, EmailMessage> outlook = new SimpleMessenger();
         EmailMessage emailMessage = outlook.WriteMessage("Message from Outlook");
-        outlook.SendMessage(emailMessage);
+        outlook.SendMessage(emailMessage); // Контравариантность
 
         IMessenger<Message, Message> telegram = new SimpleMessenger();
         Message simpleMessage = telegram.WriteMessage("Message from Telegram");
-        telegram.SendMessage(simpleMessage);
+        telegram.SendMessage(simpleMessage); // Контравариантность
 
         // * out -возвращает наружу, ковариантность - больше вариантов, более частное
         //* in -принимает внутрь, контрвариантность - меньше вариантов, более общее
