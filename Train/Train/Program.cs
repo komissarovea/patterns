@@ -1,20 +1,46 @@
-﻿class Counter
-{
-    public int Number { get; set; }
+﻿using System;
 
-    public static int operator +(int val, Counter counter)
+namespace HelloApp
+{
+    class Program
     {
-        return counter.Number + val;
+        static void Main(string[] args)
+        {
+            Employee tom = new Employee("Tom", "Microsoft");
+        }
     }
-}
-class Program
-{
-    static void Main(string[] args)
-    {
-        Counter counter = new Counter { Number = 45 };
-        int x = 6 + counter;
-        Console.WriteLine(x);  // 51
 
-        Console.ReadKey();
+    class Person
+    {
+        string name;
+        int age;
+
+        public Person()
+        {
+        }
+        public Person(string name) : this(name, 18)
+        {
+        }
+        public Person(string name, int age)
+        {
+            this.name = name;
+            this.age = age;
+        }
+    }
+    class Employee : Person
+    {
+        string company;
+
+        public Employee()
+        {
+        }
+        public Employee(string name, int age, string company) : base(name, age)
+        {
+            this.company = company;
+        }
+        public Employee(string name, string company) : base(name, 22)
+        {
+            this.company = company;
+        }
     }
 }
