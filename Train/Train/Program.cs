@@ -1,5 +1,7 @@
 ﻿class Person<T>
 {
+    public static T? code;
+
     public T Id { get; set; }
     public string Name { get; set; }
     public Person(T id, string name)
@@ -27,14 +29,14 @@ class Program
 
         int tomId = tom.Id;      // распаковка не нужна
         string bobId = bob.Id;  // преобразование типов не нужно
-
-        Console.WriteLine(tomId);   // 546
-        Console.WriteLine(bobId);   // abc123
-
         Company<Person<int>> microsoft = new Company<Person<int>>(tom);
 
-        Console.WriteLine(microsoft.CEO.Id);  // 546
-        Console.WriteLine(microsoft.CEO.Name);  // Tom
+
+        Person<int>.code = 1234;
+        Person<string>.code = "meta";
+
+        Console.WriteLine(Person<int>.code);       // 1234
+        Console.WriteLine(Person<string>.code);   // meta
     }
 }
 
