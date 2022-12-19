@@ -1,46 +1,40 @@
-﻿
-class Person
+﻿class Person<T>
 {
+    public T Id { get; set; }
     public string Name { get; set; }
-    public virtual void Display()
+    public Person(T id, string name)
     {
-        Console.WriteLine($"Person {Name}");
+        Id = id;
+        Name = name;
     }
 }
 
-class Employee : Person
+class Company<P>
 {
-    public string Company { get; set; }
-    public sealed override void Display()
+    public P CEO { get; set; }  // президент компании
+    public Company(P ceo)
     {
-        Console.WriteLine($"Employee {Name}");
+        CEO = ceo;
     }
 }
 
-
-sealed class Manager : Employee
-{
-    public new void Display()
-    {
-        Console.WriteLine($"Manager {Name}");
-    }
-
- 
-}
 class Program
 {
     static void Main(string[] args)
     {
-        int[] array = new int[33];
+        Person<int> tom = new Person<int>(546, "Tom");  // упаковка не нужна
+        Person<string> bob = new Person<string>("abc123", "Bob");
 
-        Person person = new Manager { Name = "Bob", Company = "Microsoft" };
-        person.Display();
-        Employee employee = person as Employee;
-        employee.Display();
+        int tomId = tom.Id;      // распаковка не нужна
+        string bobId = bob.Id;  // преобразование типов не нужно
 
-        Manager manager = person as Manager;
-        manager.Display();
+        Console.WriteLine(tomId);   // 546
+        Console.WriteLine(bobId);   // abc123
 
-        Console.ReadKey();
+        Company<Person<int>> microsoft = new Company<Person<int>>(tom);
+
+        Console.WriteLine(microsoft.CEO.Id);  // 546
+        Console.WriteLine(microsoft.CEO.Name);  // Tom
     }
 }
+
