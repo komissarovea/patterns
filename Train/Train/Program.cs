@@ -1,74 +1,44 @@
-﻿class Account
+﻿class Message
 {
-    public delegate void AccountHandler(string message);
-
-    AccountHandler? notify;
-    public event AccountHandler Notify
-    {
-        add
-        {
-            notify += value;
-            Console.WriteLine($"{value.Method.Name} добавлен");
-        }
-        remove
-        {
-            notify -= value;
-            Console.WriteLine($"{value.Method.Name} удален");
-        }
-    }            // 1.Определение события
-
-    public Account(int sum) => Sum = sum;
-
-    public int Sum { get; private set; }
-
-    public void Put(int sum)
-    {
-        Sum += sum;
-        notify?.Invoke($"На счет поступило: {sum}");   // 2.Вызов события 
-    }
-
-    public void Take(int sum)
-    {
-        if (Sum >= sum)
-        {
-            Sum -= sum;
-            notify?.Invoke($"Со счета снято: {sum}");   // 2.Вызов события
-        }
-        else
-        {
-            notify?.Invoke($"Недостаточно денег на счете. Текущий баланс: {Sum}"); ;
-        }
-    }
+    public string Text { get; }
+    public Message(string text) => Text = text;
+    public virtual void Print() => Console.WriteLine($"Message: {Text}");
+}
+class EmailMessage : Message
+{
+    public EmailMessage(string text) : base(text) { }
+    public override void Print() => Console.WriteLine($"Email: {Text}");
+}
+class SmsMessage : Message
+{
+    public SmsMessage(string text) : base(text) { }
+    public override void Print() => Console.WriteLine($"Sms: {Text}");
 }
 
 class Program
 {
 
+    delegate Message MessageBuilder(string text);
+    delegate void EmailReceiver(EmailMessage message);
+
     static void Main(string[] args)
     {
-        Account account = new Account(100);
-        account.Notify += DisplayMessage;   // Добавляем обработчик для события Notify
-        account.Put(20);    // добавляем на счет 20
-        Console.WriteLine($"Сумма на счете: {account.Sum}");
-        account.Take(70);   // пытаемся снять со счета 70
-        Console.WriteLine($"Сумма на счете: {account.Sum}");
-        account.Take(180);  // пытаемся снять со счета 180
-        Console.WriteLine($"Сумма на счете: {account.Sum}");
+        // делегату с базовым типом передаем метод с производным типом
+        MessageBuilder messageBuilder = WriteEmailMessage; // ковариантность
+        Message message = messageBuilder("Hello");
+        message.Print();    // Email: Hello
 
-        // установка делегата, который указывает на метод DisplayMessage
-        account.Notify += new Account.AccountHandler(DisplayMessage);
 
-        account.Notify += delegate (string mes)
-        {
-            Console.WriteLine(mes);
-        };
-
-        account.Notify += message => Console.WriteLine(message);
+        EmailReceiver emailBox = ReceiveMessage; // контравариантность
+        emailBox(new EmailMessage("Welcome"));  // Email: Welcome
 
 
         Console.Read();
     }
 
-   static void DisplayMessage(string message) => Console.WriteLine(message);
+    static EmailMessage WriteEmailMessage(string text) => new EmailMessage(text);
+
+    static void ReceiveMessage(Message message) => message.Print();
+
 
 }
