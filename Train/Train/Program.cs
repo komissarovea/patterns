@@ -1,24 +1,42 @@
 ﻿class Account
 {
     public delegate void AccountHandler(string message);
-    public event AccountHandler? Notify;              // 1.Определение события
+
+    AccountHandler? notify;
+    public event AccountHandler Notify
+    {
+        add
+        {
+            notify += value;
+            Console.WriteLine($"{value.Method.Name} добавлен");
+        }
+        remove
+        {
+            notify -= value;
+            Console.WriteLine($"{value.Method.Name} удален");
+        }
+    }            // 1.Определение события
+
     public Account(int sum) => Sum = sum;
+
     public int Sum { get; private set; }
+
     public void Put(int sum)
     {
         Sum += sum;
-        Notify?.Invoke($"На счет поступило: {sum}");   // 2.Вызов события 
+        notify?.Invoke($"На счет поступило: {sum}");   // 2.Вызов события 
     }
+
     public void Take(int sum)
     {
         if (Sum >= sum)
         {
             Sum -= sum;
-            Notify?.Invoke($"Со счета снято: {sum}");   // 2.Вызов события
+            notify?.Invoke($"Со счета снято: {sum}");   // 2.Вызов события
         }
         else
         {
-            Notify?.Invoke($"Недостаточно денег на счете. Текущий баланс: {Sum}"); ;
+            notify?.Invoke($"Недостаточно денег на счете. Текущий баланс: {Sum}"); ;
         }
     }
 }
@@ -47,8 +65,10 @@ class Program
 
         account.Notify += message => Console.WriteLine(message);
 
-        void DisplayMessage(string message) => Console.WriteLine(message);
 
         Console.Read();
     }
+
+   static void DisplayMessage(string message) => Console.WriteLine(message);
+
 }
