@@ -1,16 +1,18 @@
 ﻿class Program
 {
-    delegate int Operation(int x, int y);
+    delegate void Message();
 
     static void Main(string[] args)
     {
-        Operation del = Add;
-        del += Multiply;
+        Message mes1 = Hello;
+        mes1 += HowAreYou;
+        mes1 += Hello;
+        mes1 += Hello;
+        mes1 -= Hello;
+        mes1();
 
-        int result = del(6, 5);
-        Console.WriteLine(result);
         Console.Read();
     }
-    private static int Add(int x, int y) { return x + y; }
-    private static int Multiply(int x, int y) { return x * y; }
+    private static void Hello() { Console.WriteLine("Hello"); }
+    private static void HowAreYou() { Console.WriteLine("How are you?"); }
 }
