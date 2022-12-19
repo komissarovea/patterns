@@ -1,46 +1,53 @@
-﻿using System;
-
-namespace HelloApp
+﻿[FlagsAttribute()]
+[Serializable()]
+public enum Day
 {
-    class Program
+    s,
+    m
+}
+
+class Person
+{
+    public string Name { get; set; }
+    public virtual void Display()
     {
-        static void Main(string[] args)
-        {
-            Employee tom = new Employee("Tom", "Microsoft");
-        }
+        Console.WriteLine($"Person {Name}");
+    }
+}
+
+class Employee : Person
+{
+    public string Company { get; set; }
+    public new virtual void Display()
+    {
+        Console.WriteLine($"Employee {Name}");
+    }
+}
+
+
+sealed class Manager : Employee
+{
+    public new void Display()
+    {
+        Console.WriteLine($"Manager {Name}");
     }
 
-    class Person
+ 
+}
+class Program
+{
+    static void Main(string[] args)
     {
-        string name;
-        int age;
+        int[] array = new int[33];
 
-        public Person()
-        {
-        }
-        public Person(string name) : this(name, 18)
-        {
-        }
-        public Person(string name, int age)
-        {
-            this.name = name;
-            this.age = age;
-        }
-    }
-    class Employee : Person
-    {
-        string company;
+        Person person = new Manager { Name = "Bob", Company = "Microsoft" };
+        person.Display();
+        Employee employee = person as Employee;
+        employee.Display();
 
-        public Employee()
-        {
-        }
-        public Employee(string name, int age, string company) : base(name, age)
-        {
-            this.company = company;
-        }
-        public Employee(string name, string company) : base(name, 22)
-        {
-            this.company = company;
-        }
+        Manager manager = person as Manager;
+        manager.Display();
+
+        Console.ReadKey();
     }
 }
