@@ -1,13 +1,37 @@
-﻿class Person<T, K>
+﻿class Message
 {
-    public T Id { get; }
-    public K Password { get; set; }
-    public string Name { get; }
-    public Person(T id, K password, string name)
+    public string Text { get; } // текст сообщения
+    public Message(string text)
     {
-        Id = id;
-        Name = name;
-        Password = password;
+        Text = text;
+    }
+
+    public object Clone() => MemberwiseClone();
+}
+
+class EmailMessage : Message
+{
+    public EmailMessage(string text) : base(text) { }
+}
+class SmsMessage : Message
+{
+    public SmsMessage(string text) : base(text) { }
+}
+
+class Messenger<T> where T : Message
+{
+    public void SendMessage(T message)
+    {
+        Console.WriteLine($"Отправляется сообщение: {message.Text}");
+    }
+}
+
+class Instantiator<T> 
+{
+    public T instance;
+    public Instantiator()
+    {
+        instance = default(T);
     }
 }
 
@@ -15,26 +39,20 @@ class Program
 {
     static void Main(string[] args)
     {
-        Person<int, string> tom = new Person<int, string>(546, "qwerty", "Tom");
-        Console.WriteLine(tom.Id);  // 546
-        Console.WriteLine(tom.Password);// qwerty
+        string s1 = "test";
+        string s2 = "test";
+        string s3 = "test1".Substring(0, 4);
+        object s4 = s3;
 
-        int x = 7;
-        int y = 25;
-        Swap<int>(ref x, ref y); // или так Swap(ref x, ref y);
-        Console.WriteLine($"x={x}    y={y}");   // x=25   y=7
-
-        string s1 = "hello";
-        string s2 = "bye";
-        Swap<string>(ref s1, ref s2); // или так Swap(ref s1, ref s2);
-        Console.WriteLine($"s1={s1}    s2={s2}"); // s1=bye   s2=hello
+        Console.WriteLine($"{object.ReferenceEquals(s1, s2)} {s1 == s2} {s1.Equals(s2)}");
+        Console.WriteLine($"{object.ReferenceEquals(s1, s3)} {s1 == s3} {s1.Equals(s3)}");
+        Console.WriteLine($"{object.ReferenceEquals(s1, s4)} {s1 == s4} {s1.Equals(s4)}");
     }
 
-    static void Swap<T>(ref T x, ref T y)
+    void SendMessage<T>(T message) where T : Message
     {
-        T temp = x;
-        x = y;
-        y = temp;
+        Console.WriteLine($"Отправляется сообщение: {message.Text}");
     }
+
 }
 
