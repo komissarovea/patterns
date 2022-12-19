@@ -1,20 +1,53 @@
-﻿class Auto
-{
-    public string Name { get; set; }
-}
-class User
-{
-    public string Name { get; set; }
-    public Auto Auto { get; set; }
-}
-class Program
+﻿class Program
 {
     static void Main(string[] args)
     {
-        User tom = new User { Name = "Tom", Auto = new Auto { Name = "Ford" } };
-        int age = 34;
-        var student = new { tom.Auto.Name, age };
-        Console.WriteLine(student.Name);
-        Console.Read();
+        try
+        {
+            TestClass.Method1();
+        }
+        catch (DivideByZeroException ex)
+        {
+            Console.WriteLine($"Catch в Main : {ex.Message}");
+        }
+        finally
+        {
+            Console.WriteLine("Блок finally в Main");
+        }
+        Console.WriteLine("Конец метода Main");
+    }
+
+}
+
+class TestClass
+{
+    public static void Method1()
+    {
+        try
+        {
+            Method2();
+        }
+        catch (IndexOutOfRangeException ex)
+        {
+            Console.WriteLine($"Catch в Method1 : {ex.Message}");
+        }
+        finally
+        {
+            Console.WriteLine("Блок finally в Method1");
+        }
+        Console.WriteLine("Конец метода Method1");
+    }
+    static void Method2()
+    {
+        try
+        {
+            int x = 8;
+            int y = x / 0;
+        }
+        finally
+        {
+            Console.WriteLine("Блок finally в Method2");
+        }
+        Console.WriteLine("Конец метода Method2");
     }
 }
