@@ -1,52 +1,11 @@
-﻿[FlagsAttribute()]
-[Serializable()]
-public enum Day
-{
-    s,
-    m
-}
-
-class Person
-{
-    public string Name { get; set; }
-    public virtual void Display()
-    {
-        Console.WriteLine($"Person {Name}");
-    }
-}
-
-class Employee : Person
-{
-    public string Company { get; set; }
-    public new virtual void Display()
-    {
-        Console.WriteLine($"Employee {Name}");
-    }
-}
-
-
-sealed class Manager : Employee
-{
-    public new void Display()
-    {
-        Console.WriteLine($"Manager {Name}");
-    }
-
- 
-}
-class Program
+﻿class Program
 {
     static void Main(string[] args)
     {
-        int[] array = new int[33];
+        int a = 25;
+        int b = 32;
 
-        Person person = new Manager { Name = "Bob", Company = "Microsoft" };
-        person.Display();
-        Employee employee = person as Employee;
-        employee.Display();
-
-        Manager manager = person as Manager;
-        manager.Display();
+        Console.WriteLine(a < 29 ^ b < 29);
 
         Console.ReadKey();
     }
