@@ -1,13 +1,15 @@
-﻿int j = 2;
-for (int i = 2; i < 32; i = i * 2)
+﻿using System.Text;
+
+char c = 'a';
+int a = 1;
+
+unsafe
 {
-    while (i < j)
-    {
-        j = checked((int)(j * 2));
-        Console.WriteLine(j);
-    }
-    i = j - i;
+    Console.WriteLine(Encoding.Unicode.GetByteCount("aaы"));
 }
+
+int[] array = new int[33];
+int[,] nums = new int[3,3];
 
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
