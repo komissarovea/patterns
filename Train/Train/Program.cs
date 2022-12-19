@@ -1,24 +1,13 @@
-﻿class Message
+﻿class Instantiator<T> where T :  new()
 {
-    public string Text { get; } // текст сообщения
-    public Message(string text)
+    public T instance;
+    public Instantiator()
     {
-        Text = text;
+        instance = new T();
     }
-
-    public object Clone() => MemberwiseClone();
 }
 
-class EmailMessage : Message
-{
-    public EmailMessage(string text) : base(text) { }
-}
-class SmsMessage : Message
-{
-    public SmsMessage(string text) : base(text) { }
-}
-
-class Messenger<T> where T : Message
+class Messenger<T> where T : Message, new()
 {
     public void SendMessage(T message)
     {
@@ -26,13 +15,34 @@ class Messenger<T> where T : Message
     }
 }
 
-class Instantiator<T> 
+class Message
 {
-    public T instance;
-    public Instantiator()
+    public string Text { get; } // текст сообщения
+    public Message(string text)
     {
-        instance = default(T);
+        Text = text;
     }
+}
+class EmailMessage : Message
+{
+    public EmailMessage(string text) : base(text) { }
+}
+
+class Messenger<T, P>
+    where T : Message
+    where P : Person
+{
+    public void SendMessage(P sender, P receiver, T message)
+    {
+        Console.WriteLine($"Отправитель: {sender.Name}");
+        Console.WriteLine($"Получатель: {receiver.Name}");
+        Console.WriteLine($"Сообщение: {message.Text}");
+    }
+}
+class Person
+{
+    public string Name { get; }
+    public Person(string name) => Name = name;
 }
 
 class Program
@@ -49,10 +59,6 @@ class Program
         Console.WriteLine($"{object.ReferenceEquals(s1, s4)} {s1 == s4} {s1.Equals(s4)}");
     }
 
-    void SendMessage<T>(T message) where T : Message
-    {
-        Console.WriteLine($"Отправляется сообщение: {message.Text}");
-    }
 
 }
 
