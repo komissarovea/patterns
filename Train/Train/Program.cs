@@ -1,14 +1,14 @@
-﻿Person tom = new Person { name = "Tom", age = 22 };
-Person bob = tom with { name = "Bob" };
-bob.Print();    // Имя: Bob  Возраст: 22
-
-struct Person
+﻿class Person
 {
-    public string name;
-    public int age;
-
-    public void Print()
+    internal string Name { internal get; set; } = "Bob";
+}
+class Program
+{
+    static void Main(string[] args)
     {
-        Console.WriteLine($"Имя: {name}  Возраст: {age}");
+        Person tom = new Person { Name = "Tom" };
+        Console.WriteLine(tom.Name);
+
+        Console.ReadKey();
     }
 }
