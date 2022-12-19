@@ -19,6 +19,7 @@ class SimpleMessenger : IMessenger<Message, EmailMessage>
     {
         Console.WriteLine($"Отправляется сообщение: {message.Text}");
     }
+
     public EmailMessage WriteMessage(string text)
     {
         return new EmailMessage($"Email: {text}");
@@ -30,7 +31,7 @@ class Program
     static void Main(string[] args)
     {
         IMessenger<EmailMessage, Message> messenger = new SimpleMessenger();
-        EmailMessage message = messenger.WriteMessage("Hello World"); //Ковариантность
+        Message message = messenger.WriteMessage("Hello World");
         Console.WriteLine(message.Text);
         messenger.SendMessage(new EmailMessage("Test"));
 
@@ -42,10 +43,11 @@ class Program
         Message simpleMessage = telegram.WriteMessage("Message from Telegram");
         telegram.SendMessage(simpleMessage);
 
+        // * out -возвращает наружу, ковариантность - больше вариантов, более частное
+        //* in -принимает внутрь, контрвариантность - меньше вариантов, более общее
+
         Console.Read();
     }
-
-
 
 
 }
