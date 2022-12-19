@@ -1,17 +1,14 @@
-﻿enum Day
+﻿Person tom = new Person { name = "Tom", age = 22 };
+Person bob = tom with { name = "Bob" };
+bob.Print();    // Имя: Bob  Возраст: 22
+
+struct Person
 {
-    Monday = 5,
-    Tuesday,
-    Wednesday,
-    Thursday = 14,
-    Friday = Tuesday,
-    Saturday,
-    Sunday
-}
-class Program
-{
-    static void Main(string[] args)
+    public string name;
+    public int age;
+
+    public void Print()
     {
-        Console.WriteLine((int)Day.Sunday);
+        Console.WriteLine($"Имя: {name}  Возраст: {age}");
     }
 }
