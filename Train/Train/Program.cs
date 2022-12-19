@@ -1,62 +1,62 @@
-﻿class Instantiator<T> where T :  new()
+﻿class Person<T> 
 {
-    public T instance;
-    public Instantiator()
+    public T Id { get; }
+    public Person(T id)
     {
-        instance = new T();
+        Id = id;
     }
 }
 
-class Messenger<T> where T : Message, new()
+class UniversalPerson<T> : Person<T>
 {
-    public void SendMessage(T message)
+    public UniversalPerson(T id) : base(id) { }
+}
+
+
+class StringPerson : Person<string>
+{
+    public StringPerson(string id) : base(id) { }
+}
+
+class IntPerson<T> : Person<int>
+{
+    public T Code { get; set; }
+    public IntPerson(int id, T code) : base(id)
     {
-        Console.WriteLine($"Отправляется сообщение: {message.Text}");
+        Code = code;
     }
 }
 
-class Message
+class MixedPerson<T, K> : Person<T>
+    where K : struct
 {
-    public string Text { get; } // текст сообщения
-    public Message(string text)
+    public K Code { get; set; }
+    public MixedPerson(T id, K code) : base(id)
     {
-        Text = text;
+        Code = code;
     }
-}
-class EmailMessage : Message
-{
-    public EmailMessage(string text) : base(text) { }
-}
-
-class Messenger<T, P>
-    where T : Message
-    where P : Person
-{
-    public void SendMessage(P sender, P receiver, T message)
-    {
-        Console.WriteLine($"Отправитель: {sender.Name}");
-        Console.WriteLine($"Получатель: {receiver.Name}");
-        Console.WriteLine($"Сообщение: {message.Text}");
-    }
-}
-class Person
-{
-    public string Name { get; }
-    public Person(string name) => Name = name;
 }
 
 class Program
 {
     static void Main(string[] args)
     {
-        string s1 = "test";
-        string s2 = "test";
-        string s3 = "test1".Substring(0, 4);
-        object s4 = s3;
+        StringPerson person4 = new StringPerson("438767");
+        Person<string> person5 = new StringPerson("43875");
+        // так нельзя написать
+        //Person<int> person6 = new StringPerson("45545");
+        Console.WriteLine(person4.Id);
+        Console.WriteLine(person5.Id);
 
-        Console.WriteLine($"{object.ReferenceEquals(s1, s2)} {s1 == s2} {s1.Equals(s2)}");
-        Console.WriteLine($"{object.ReferenceEquals(s1, s3)} {s1 == s3} {s1.Equals(s3)}");
-        Console.WriteLine($"{object.ReferenceEquals(s1, s4)} {s1 == s4} {s1.Equals(s4)}");
+        IntPerson<string> person7 = new IntPerson<string>(5, "r4556");
+        Person<int> person8 = new IntPerson<long>(7, 4587);
+        Console.WriteLine(person7.Id);
+        Console.WriteLine(person8.Id);
+
+        MixedPerson<string, int> person9 = new MixedPerson<string, int>("456", 356);
+        Person<string> person10 = new MixedPerson<string, int>("9867", 35678);
+        Console.WriteLine(person9.Id);
+        Console.WriteLine(person10.Id);
     }
 
 
