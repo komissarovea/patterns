@@ -1,60 +1,16 @@
-﻿public class RunAction : IRunAction
+﻿class Program
 {
-    public void Move()
-    {
-        Console.WriteLine("I am running");
-    }
+    delegate int Operation(int x, int y);
 
-}
-
-public interface IAction
-{
-    void Move();
-}
-internal interface IRunAction : IAction
-{
-    new void Move();
-}
-
-interface IFoo
-{
-    void Execute();
-}
-interface IBar
-{
-    void Execute();
-}
-class Tester : IFoo, IBar
-{
-    public void Execute()
-    {
-        Console.WriteLine("Tester Executes");
-    }
-
-    void IFoo.Execute()
-    {
-        Console.WriteLine("IFoo Executes");
-    }
-    void IBar.Execute()
-    {
-        Console.WriteLine("IBar Executes");
-    }
-}
-
-class Program
-{
     static void Main(string[] args)
     {
-        Tester t = new Tester();
-        t.Execute();
+        Operation del = Add;
+        del += Multiply;
 
-        ((IBar)t).Execute();
-        (t as IFoo).Execute();
-
-        IAction action = new RunAction();
-        action.Move();
-
-        Console.ReadKey();
+        int result = del(6, 5);
+        Console.WriteLine(result);
+        Console.Read();
     }
+    private static int Add(int x, int y) { return x + y; }
+    private static int Multiply(int x, int y) { return x * y; }
 }
-
