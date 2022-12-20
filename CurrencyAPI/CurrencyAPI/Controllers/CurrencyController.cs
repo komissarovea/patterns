@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CurrencyAPI.Controllers
 {
-    //[Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class CurrencyController : ControllerBase
     {
@@ -13,7 +13,7 @@ namespace CurrencyAPI.Controllers
             _currencyService = currencyService;
         }
 
-        [HttpGet("/api/getCurrencyRate")]
+        [HttpGet("getCurrencyRate")]
         public IActionResult GetCurrencyRate(bool reverse)
         {
             double rateVal;
