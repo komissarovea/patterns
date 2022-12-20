@@ -17,7 +17,7 @@ namespace CurrencyAPI.Controllers
         public async Task<IActionResult> GetCurrencyRate(bool reverse = false)
         {
             double rateVal;
-            try
+            //try
             {
                  rateVal = await _currencyService.GetCurrencyRate();
                 if (reverse)
@@ -25,10 +25,10 @@ namespace CurrencyAPI.Controllers
                     rateVal = 1 / rateVal;
                 }
             }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { error = $"Get Currency Rate error: {ex.Message}" });
-            }
+            //catch (Exception ex)
+            //{
+            //    return StatusCode(500, new { error = $"Get Currency Rate error: {ex.Message}" });
+            //}
             CurrencyRate rate = new CurrencyRate() { Value = rateVal, IsReversed = reverse };
             return Ok(rate);
         }
