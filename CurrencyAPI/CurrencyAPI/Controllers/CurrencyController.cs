@@ -13,6 +13,7 @@ namespace CurrencyAPI.Controllers
             _currencyService = currencyService;
         }
 
+        [CustomExceptionFilter]
         [HttpGet("getCurrencyRate")]
         public async Task<IActionResult> GetCurrencyRate(bool reverse = false)
         {
