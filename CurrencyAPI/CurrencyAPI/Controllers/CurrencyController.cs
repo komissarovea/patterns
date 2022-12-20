@@ -14,12 +14,12 @@ namespace CurrencyAPI.Controllers
         }
 
         [HttpGet("getCurrencyRate")]
-        public IActionResult GetCurrencyRate(bool reverse)
+        public async Task<IActionResult> GetCurrencyRate(bool reverse = false)
         {
             double rateVal;
             try
             {
-                 rateVal = _currencyService.GetCurrencyRate();
+                 rateVal = await _currencyService.GetCurrencyRate();
                 if (reverse)
                 {
                     rateVal = 1 / rateVal;

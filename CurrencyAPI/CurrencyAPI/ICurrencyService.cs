@@ -6,6 +6,6 @@
         /// 
         /// </summary>
         /// <returns></returns>
-        double GetCurrencyRate();
+        Task<double> GetCurrencyRate();
     }
 }

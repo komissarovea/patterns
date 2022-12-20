@@ -5,13 +5,13 @@ namespace CurrencyAPI
 {
     public class ParserCurrencyService : ICurrencyService
     {
-        public double GetCurrencyRate()
+        public async Task<double> GetCurrencyRate()
         {
             double rate = 0;
             var url = "http://www.finmarket.ru/currency/rates/?id=10089";
 
             var web = new HtmlWeb();
-            var doc = web.Load(url);
+            var doc = await web.LoadFromWebAsync(url);
 
             var buttonNode = doc.GetElementbyId("ft_52148");
 
